@@ -105,12 +105,22 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
         padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
         child: Column(
           children: [
+            // Header
+            Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Text(
+                'Meditation Timer',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
             // Random inspirational quote - reduced space
             Flexible(
               flex: 2,
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Center(
                   child: Text(
                     _randomQuote,

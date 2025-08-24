@@ -10,8 +10,10 @@ class CarouselHomePage extends StatefulWidget {
 }
 
 class _CarouselHomePageState extends State<CarouselHomePage> {
-  final PageController _pageController = PageController();
-  int _currentPage = 0;
+  final PageController _pageController = PageController(
+    viewportFraction: 0.85, // Multi-browse effect: show 85% of current page
+    initialPage: 0,
+  );
 
   @override
   void dispose() {
@@ -23,106 +25,18 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            // Page indicator
-            Container(
-              padding: const EdgeInsets.symmetric(vertical: 4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  _buildPageIndicator(0, 'Meditate'),
-                  const SizedBox(width: 20),
-                  _buildPageIndicator(1, 'Bells'),
-                ],
-              ),
-            ),
-
-            // Carousel content - fills all available space
-            Expanded(
-              child: PageView(
-                controller: _pageController,
-                scrollDirection: Axis.vertical,
-                onPageChanged: (index) {
-                  setState(() {
-                    _currentPage = index;
-                  });
-                },
-                children: const [MeditationTimerPage(), MindfulBellsPage()],
-              ),
-            ),
-
-            // Navigation hint
-            Container(
-              decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 250, 184, 203),
-              ),
-              padding: const EdgeInsets.all(4),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.keyboard_arrow_up,
-                    color: Colors.grey[600],
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Text(
-                    'Swipe up/down to navigate',
-                    style: TextStyle(color: Colors.grey[600], fontSize: 12),
-                  ),
-                  const SizedBox(width: 8),
-                  Icon(
-                    Icons.keyboard_arrow_down,
-                    color: Colors.grey[600],
-                    size: 20,
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget _buildPageIndicator(int pageIndex, String label) {
-    final bool isActive = _currentPage == pageIndex;
-    return GestureDetector(
-      onTap: () {
-        _pageController.animateToPage(
-          pageIndex,
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-        );
-      },
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        decoration: BoxDecoration(
-          color: isActive ? Colors.deepPurple : Colors.grey[200],
-          borderRadius: BorderRadius.circular(20),
-        ),
-        child: Row(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              width: 8,
-              height: 8,
-              decoration: BoxDecoration(
-                color: isActive ? Colors.white : Colors.grey[400],
-                shape: BoxShape.circle,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Text(
-              label,
-              style: TextStyle(
-                color: isActive ? Colors.white : Colors.grey[600],
-                fontWeight: isActive ? FontWeight.bold : FontWeight.normal,
-                fontSize: 14,
-              ),
-            ),
-          ],
+        child: PageView.builder(
+          controller: _pageController,
+          scrollDirection: Axis.vertical,
+          padEnds: false, // Remove padding to show partial content
+          itemCount: 2, // Material 3 explicitly defines item count
+          itemBuilder: (context, index) {
+            return Center(
+              child: index == 0
+                  ? const MeditationTimerPage()
+                  : const MindfulBellsPage(),
+            );
+          },
         ),
       ),
     );
