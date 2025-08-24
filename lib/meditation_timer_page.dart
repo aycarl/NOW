@@ -99,15 +99,18 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            children: [
-              // Random inspirational quote
-              Expanded(
-                flex: 2,
+    return Container(
+      decoration: BoxDecoration(color: Colors.deepPurple[50]),
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
+        child: Column(
+          children: [
+            // Random inspirational quote - reduced space
+            Flexible(
+              flex: 2,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Center(
                   child: Text(
                     _randomQuote,
@@ -119,66 +122,72 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
                   ),
                 ),
               ),
+            ),
 
-              // Timer, Sound, and Preparation Controls
-              Expanded(
-                flex: 3,
-                child: Column(
-                  children: [
-                    // Timer Picker
-                    Card(
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.timer,
-                          color: Colors.deepPurple,
-                        ),
-                        title: const Text('Meditation Duration'),
-                        subtitle: Text('$_selectedMinutes minutes'),
-                        trailing: const Icon(Icons.arrow_drop_down),
-                        onTap: _showTimePicker,
+            // Timer, Sound, and Preparation Controls - more space
+            Flexible(
+              flex: 6,
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  // Timer Picker
+                  Card(
+                    margin: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.timer,
+                        color: Colors.deepPurple,
                       ),
+                      title: const Text('Meditation Duration'),
+                      subtitle: Text('$_selectedMinutes minutes'),
+                      trailing: const Icon(Icons.arrow_drop_down),
+                      onTap: _showTimePicker,
                     ),
-                    const SizedBox(height: 16),
+                  ),
 
-                    // Sound Picker
-                    Card(
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.music_note,
-                          color: Colors.deepPurple,
-                        ),
-                        title: const Text('Sound'),
-                        subtitle: Text(
-                          _soundOptions.firstWhere(
-                            (s) => s['value'] == _selectedSound,
-                          )['label']!,
-                        ),
-                        trailing: const Icon(Icons.arrow_drop_down),
-                        onTap: _showSoundPicker,
+                  // Sound Picker
+                  Card(
+                    margin: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.music_note,
+                        color: Colors.deepPurple,
                       ),
+                      title: const Text('Sound'),
+                      subtitle: Text(
+                        _soundOptions.firstWhere(
+                          (s) => s['value'] == _selectedSound,
+                        )['label']!,
+                      ),
+                      trailing: const Icon(Icons.arrow_drop_down),
+                      onTap: _showSoundPicker,
                     ),
-                    const SizedBox(height: 16),
+                  ),
 
-                    // Preparation Time Picker
-                    Card(
-                      child: ListTile(
-                        leading: const Icon(
-                          Icons.hourglass_empty,
-                          color: Colors.deepPurple,
-                        ),
-                        title: const Text('Preparation Time'),
-                        subtitle: Text('$_preparationSeconds seconds'),
-                        trailing: const Icon(Icons.arrow_drop_down),
-                        onTap: _showPreparationPicker,
+                  // Preparation Time Picker
+                  Card(
+                    margin: const EdgeInsets.symmetric(vertical: 4.0),
+                    child: ListTile(
+                      leading: const Icon(
+                        Icons.hourglass_empty,
+                        color: Colors.deepPurple,
                       ),
+                      title: const Text('Preparation Time'),
+                      subtitle: Text('$_preparationSeconds seconds'),
+                      trailing: const Icon(Icons.arrow_drop_down),
+                      onTap: _showPreparationPicker,
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
+            ),
 
-              // Action Buttons
-              Expanded(
-                flex: 1,
+            // Action Buttons - optimized size
+            Flexible(
+              flex: 2,
+              child: Container(
+                width: double.infinity,
+                padding: const EdgeInsets.symmetric(vertical: 16.0),
                 child: Row(
                   children: [
                     Expanded(
@@ -189,6 +198,7 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey[200],
                           foregroundColor: Colors.deepPurple,
+                          minimumSize: const Size(0, 48),
                         ),
                       ),
                     ),
@@ -202,19 +212,19 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple,
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(vertical: 16),
+                          minimumSize: const Size(0, 48),
                         ),
                       ),
                     ),
                   ],
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
+            ),
+          ],
+        ), // Column
+      ), // Padding
+    ); // Container
+  } // build method
 }
 
 // Time Picker Dialog

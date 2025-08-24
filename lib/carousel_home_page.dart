@@ -22,12 +22,12 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          // Page indicator
-          SafeArea(
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+      body: SafeArea(
+        child: Column(
+          children: [
+            // Page indicator
+            Container(
+              padding: const EdgeInsets.symmetric(vertical: 4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -37,26 +37,27 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
                 ],
               ),
             ),
-          ),
 
-          // Carousel content
-          Expanded(
-            child: PageView(
-              controller: _pageController,
-              scrollDirection: Axis.vertical,
-              onPageChanged: (index) {
-                setState(() {
-                  _currentPage = index;
-                });
-              },
-              children: const [MeditationTimerPage(), MindfulBellsPage()],
+            // Carousel content - fills all available space
+            Expanded(
+              child: PageView(
+                controller: _pageController,
+                scrollDirection: Axis.vertical,
+                onPageChanged: (index) {
+                  setState(() {
+                    _currentPage = index;
+                  });
+                },
+                children: const [MeditationTimerPage(), MindfulBellsPage()],
+              ),
             ),
-          ),
 
-          // Navigation hint
-          SafeArea(
-            child: Container(
-              padding: const EdgeInsets.all(16),
+            // Navigation hint
+            Container(
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 250, 184, 203),
+              ),
+              padding: const EdgeInsets.all(4),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -79,8 +80,8 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
