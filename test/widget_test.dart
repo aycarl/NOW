@@ -10,11 +10,14 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:now/main.dart';
 
 void main() {
-  testWidgets('App launches successfully', (WidgetTester tester) async {
+  testWidgets('App launches successfully with carousel', (
+    WidgetTester tester,
+  ) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(const NOWApp());
 
-    // Verify that the app title is displayed.
-    expect(find.text('Mindful Bells'), findsOneWidget);
+    // Verify that the carousel indicators are displayed.
+    expect(find.text('Meditate'), findsOneWidget);
+    expect(find.text('Bells'), findsOneWidget);
   });
 }
