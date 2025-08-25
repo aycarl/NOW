@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'bell_form_dialog.dart';
 import 'angel_numbers_page.dart';
+import 'settings_provider.dart';
 
 class MindfulBellsPage extends StatefulWidget {
   final int currentPageIndex;
@@ -51,6 +53,7 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final settingsProvider = Provider.of<SettingsProvider>(context);
     if (widget.currentPageIndex == 0) {
       return Container(
         alignment: Alignment.topLeft,
@@ -138,7 +141,7 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
           ],
         ),
       ),
-      floatingActionButton: bells.length < 5
+      floatingActionButton: bells.length < settingsProvider.maxBells
           ? FloatingActionButton(
               onPressed: _addBell,
               tooltip: 'Add Mindful Bell',

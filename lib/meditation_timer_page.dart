@@ -157,21 +157,6 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      // Timer Picker
-                      Card(
-                        margin: const EdgeInsets.symmetric(vertical: 4.0),
-                        child: ListTile(
-                          leading: const Icon(
-                            Icons.timer,
-                            color: Colors.deepPurple,
-                          ),
-                          title: const Text('Meditation Duration'),
-                          subtitle: Text('$_selectedMinutes minutes'),
-                          trailing: const Icon(Icons.arrow_drop_down),
-                          onTap: _showTimePicker,
-                        ),
-                      ),
-
                       // Sound Picker
                       Card(
                         margin: const EdgeInsets.symmetric(vertical: 4.0),
@@ -188,6 +173,20 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
                           ),
                           trailing: const Icon(Icons.arrow_drop_down),
                           onTap: _showSoundPicker,
+                        ),
+                      ),
+                      // Timer Picker
+                      Card(
+                        margin: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.timer,
+                            color: Colors.deepPurple,
+                          ),
+                          title: const Text('Duration'),
+                          subtitle: Text('$_selectedMinutes minutes'),
+                          trailing: const Icon(Icons.arrow_drop_down),
+                          onTap: _showTimePicker,
                         ),
                       ),
 
@@ -217,16 +216,15 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: SizedBox(
               width: double.infinity,
-              child: ElevatedButton.icon(
+              child: ElevatedButton(
                 onPressed: _startMeditation,
-                icon: const Icon(Icons.play_arrow),
-                label: const Text('Meditate'),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.deepPurple,
                   foregroundColor: Colors.white,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   textStyle: const TextStyle(fontSize: 18),
                 ),
+                child: const Text('Meditate'),
               ),
             ),
           ),
