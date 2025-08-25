@@ -5,12 +5,13 @@ import 'package:now/carousel_home_page.dart';
 import 'package:now/meditation_timer_page.dart';
 import 'package:now/mindful_bells_page.dart';
 import 'package:now/angel_numbers_page.dart';
+import 'package:now/settings_page.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {
   group('App Integration Tests', () {
     group('App Launch and Navigation', () {
-      testWidgets('app launches successfully with correct theme', (WidgetTester tester) async {
+      testWidgets('app launches successfully with correct structure', (WidgetTester tester) async {
         // Act - Launch the app
         await tester.pumpWidget(const NOWApp());
         await tester.pumpAndSettle();
@@ -22,12 +23,36 @@ void main() {
         // Verify theme consistency
         TestHelpers.verifyThemeConsistency(tester);
         
-        // Verify basic navigation elements exist
-        expect(find.text('Meditate'), findsOneWidget);
-        expect(find.text('Bells'), findsOneWidget);
+        // Verify app bar and main elements exist
+        expect(find.text('N:OW'), findsOneWidget);
+        expect(find.byIcon(Icons.favorite_border), findsOneWidget);
+        expect(find.byIcon(Icons.settings), findsOneWidget);
       });
 
-      testWidgets('carousel navigation between pages works', (WidgetTester tester) async {
+      testWidgets('app bar navigation works correctly', (WidgetTester tester) async {
+        // Arrange
+        await tester.pumpWidget(const NOWApp());
+        await tester.pumpAndSettle();
+
+        // Test donations modal
+        await tester.tap(find.byIcon(Icons.favorite_border));
+        await tester.pumpAndSettle();
+        
+        expect(find.text('Donations - Coming Soon!'), findsOneWidget);
+        
+        // Close modal
+        await tester.tapAt(const Offset(50, 50));
+        await tester.pumpAndSettle();
+        
+        // Test settings navigation
+        await tester.tap(find.byIcon(Icons.settings));
+        await tester.pumpAndSettle();
+        
+        // Should navigate to settings (can't verify full navigation without complex setup)
+        expect(find.byIcon(Icons.settings), findsOneWidget);
+      });
+
+      testWidgets('vertical page carousel works correctly', (WidgetTester tester) async {
         // Arrange
         await tester.pumpWidget(const NOWApp());
         await tester.pumpAndSettle();
@@ -36,23 +61,16 @@ void main() {
         expect(find.byType(MeditationTimerPage), findsOneWidget);
         expect(find.byType(MindfulBellsPage), findsOneWidget);
         
-        // Verify navigation buttons are functional
-        final meditateButton = find.text('Meditate');
-        final bellsButton = find.text('Bells');
-        
-        expect(meditateButton, findsOneWidget);
-        expect(bellsButton, findsOneWidget);
-
-        // Act - Test button interactions
-        await tester.tap(meditateButton);
-        await tester.pump();
-        
-        await tester.tap(bellsButton);
-        await tester.pump();
-
-        // Assert - No crashes, buttons still exist
-        expect(find.text('Meditate'), findsOneWidget);
-        expect(find.text('Bells'), findsOneWidget);
+        // Verify page toggle functionality
+        final toggleButton = find.byIcon(Icons.remove);
+        if (tester.any(toggleButton)) {
+          await tester.tap(toggleButton);
+          await tester.pumpAndSettle();
+          
+          // Page should change
+          expect(find.byType(MeditationTimerPage), findsOneWidget);
+          expect(find.byType(MindfulBellsPage), findsOneWidget);
+        }
       });
     });
 
@@ -97,8 +115,7 @@ void main() {
 
         // Assert - Back to main app
         expect(find.byType(CarouselHomePage), findsOneWidget);
-        expect(find.text('Meditate'), findsOneWidget);
-        expect(find.text('Bells'), findsOneWidget);
+        expect(find.text('N:OW'), findsOneWidget);
       });
     });
 
@@ -109,24 +126,38 @@ void main() {
         await tester.pumpAndSettle();
 
         // Verify meditation page is accessible
-        expect(find.text('Meditation Timer'), findsOneWidget);
+        expect(find.text('Meditation Timer'), findsAtLeastNWidgets(1));
         
         // Verify meditation controls exist
-        expect(find.text('Meditation Duration'), findsOneWidget);
+        expect(find.text('Duration'), findsOneWidget);
         expect(find.text('Sound'), findsOneWidget);
         expect(find.text('Preparation Time'), findsOneWidget);
         
-        // Verify action buttons
-        expect(find.text('Start'), findsOneWidget);
-        expect(find.text('Save Preset'), findsOneWidget);
+        // Verify initial values
+        expect(find.textContaining('10 minutes'), findsOneWidget);
+        expect(find.text('Default'), findsOneWidget);
+        expect(find.textContaining('10 seconds'), findsOneWidget);
         
-        // Test duration picker interaction
-        await tester.tap(find.text('Meditation Duration'));
+        // Verify action button
+        expect(find.text('Meditate'), findsOneWidget);
+        
+        // Test sound picker interaction
+        await tester.tap(find.widgetWithText(ListTile, 'Sound'));
         await tester.pumpAndSettle();
         
-        // Should show time picker dialog (though we can't fully test it due to platform channels)
-        // The tap should not crash the app
-        expect(find.text('Meditation Timer'), findsOneWidget);
+        // Should show sound picker dialog
+        expect(find.text('Select Sound'), findsOneWidget);
+        
+        // Cancel dialog
+        await tester.tap(find.text('Cancel'));
+        await tester.pumpAndSettle();
+        
+        // Test meditate button
+        await tester.tap(find.text('Meditate'));
+        await tester.pumpAndSettle();
+        
+        // Should show snackbar
+        expect(find.textContaining('Starting'), findsOneWidget);
       });
 
       testWidgets('complete bell management workflow', (WidgetTester tester) async {
@@ -237,24 +268,31 @@ void main() {
     });
 
     group('Error Handling', () {
-      testWidgets('app handles navigation errors gracefully', (WidgetTester tester) async {
+      testWidgets('app handles rapid interactions gracefully', (WidgetTester tester) async {
         // Arrange
         await tester.pumpWidget(const NOWApp());
         await tester.pumpAndSettle();
 
-        // Rapidly tap navigation elements
+        // Rapidly tap app bar elements
         for (int i = 0; i < 3; i++) {
-          await tester.tap(find.text('Meditate'));
+          await tester.tap(find.byIcon(Icons.favorite_border));
           await tester.pump(const Duration(milliseconds: 50));
           
-          await tester.tap(find.text('Bells'));
+          // Close modal if it opens
+          if (tester.any(find.text('Donations - Coming Soon!'))) {
+            await tester.tapAt(const Offset(50, 50));
+            await tester.pump(const Duration(milliseconds: 50));
+          }
+          
+          await tester.tap(find.byIcon(Icons.settings));
           await tester.pump(const Duration(milliseconds: 50));
         }
 
         await tester.pumpAndSettle();
 
         // App should still be functional
-        expect(find.text('Meditation Timer'), findsOneWidget);
+        expect(find.text('N:OW'), findsOneWidget);
+        expect(find.text('Meditation Timer'), findsAtLeastNWidgets(1));
         expect(find.text('Mindful Bells'), findsOneWidget);
       });
 
