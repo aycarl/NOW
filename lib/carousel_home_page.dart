@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'meditation_timer_page.dart';
 import 'mindful_bells_page.dart';
+import 'settings_page.dart';
 
 class CarouselHomePage extends StatefulWidget {
   const CarouselHomePage({super.key});
@@ -11,9 +12,10 @@ class CarouselHomePage extends StatefulWidget {
 
 class _CarouselHomePageState extends State<CarouselHomePage> {
   final PageController _pageController = PageController(
-    viewportFraction: 0.85, // Multi-browse effect: show 85% of current page
+    viewportFraction: 0.9, // Multi-browse effect: show 90% of current page
     initialPage: 0,
   );
+  int _currentPage = 0;
 
   @override
   void dispose() {
@@ -24,16 +26,37 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('NOW'),
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsPage()),
+              );
+            },
+          ),
+        ],
+      ),
       body: SafeArea(
         child: PageView.builder(
           controller: _pageController,
           scrollDirection: Axis.vertical,
           padEnds: false, // Remove padding to show partial content
+          onPageChanged: (index) {
+            setState(() {
+              _currentPage = index;
+            });
+          },
           itemCount: 2, // Material 3 explicitly defines item count
           itemBuilder: (context, index) {
             return Center(
               child: index == 0
-                  ? const MeditationTimerPage()
+                  ? MeditationTimerPage(currentPageIndex: _currentPage)
                   : const MindfulBellsPage(),
             );
           },

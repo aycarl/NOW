@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:provider/provider.dart';
 import 'carousel_home_page.dart';
+import 'theme_provider.dart';
 
-void main() {
-  runApp(const NOWApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const NOWApp(),
+    ),
+  );
 }
 
 class NOWApp extends StatelessWidget {
@@ -11,10 +19,21 @@ class NOWApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       title: 'NOW',
+      themeMode: themeProvider.darkTheme ? ThemeMode.dark : ThemeMode.light,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+          surface: const Color(0xFF121212), // A common dark theme surface color
+        ),
         useMaterial3: true,
       ),
       home: const CarouselHomePage(),

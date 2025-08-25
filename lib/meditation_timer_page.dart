@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 
 class MeditationTimerPage extends StatefulWidget {
-  const MeditationTimerPage({super.key});
+  final int currentPageIndex;
+
+  const MeditationTimerPage({super.key, this.currentPageIndex = 0});
 
   @override
   State<MeditationTimerPage> createState() => _MeditationTimerPageState();
@@ -99,6 +101,35 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Show only heading when this page is not active (currentPageIndex is 1)
+    if (widget.currentPageIndex == 1) {
+      return Container(
+        decoration: BoxDecoration(color: Colors.deepPurple[50]),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Icon(
+                Icons.self_improvement,
+                size: 48,
+                color: Colors.deepPurple[700],
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Meditation Timer',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      );
+    }
+
+    // Show full content when this page is active (currentPageIndex is 0)
     return Container(
       decoration: BoxDecoration(color: Colors.deepPurple[50]),
       child: Padding(
