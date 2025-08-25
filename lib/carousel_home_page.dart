@@ -27,9 +27,15 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('NOW'),
+        centerTitle: false,
+        title: Text(
+          'N:OW',
+          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+            color: Colors.deepPurple,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         elevation: 0,
-        backgroundColor: Colors.transparent,
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -57,7 +63,7 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
             return Center(
               child: index == 0
                   ? MeditationTimerPage(currentPageIndex: _currentPage)
-                  : const MindfulBellsPage(),
+                  : MindfulBellsPage(currentPageIndex: _currentPage),
             );
           },
         ),
