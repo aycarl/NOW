@@ -39,6 +39,26 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
         elevation: 0,
         actions: [
           IconButton(
+            icon: const Icon(Icons.favorite_border),
+            onPressed: () {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) {
+                  return Container(
+                    height: MediaQuery.of(context).size.height * 0.7,
+                    child: const Center(
+                      child: Text(
+                        'Donations - Coming Soon!',
+                        style: TextStyle(fontSize: 24),
+                      ),
+                    ),
+                  );
+                },
+              );
+            },
+          ),
+          IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {
               Navigator.push(
