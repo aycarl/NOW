@@ -12,7 +12,7 @@ class CarouselHomePage extends StatefulWidget {
 
 class _CarouselHomePageState extends State<CarouselHomePage> {
   final PageController _pageController = PageController(
-    viewportFraction: 0.9, // Multi-browse effect: show 90% of current page
+    viewportFraction: 0.92, // Multi-browse effect: show 92% of current page
     initialPage: 0,
   );
   int _currentPage = 0;
@@ -23,10 +23,19 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
     super.dispose();
   }
 
+  void _togglePage() {
+    final newPage = _currentPage == 0 ? 1 : 0;
+    _pageController.animateToPage(
+      newPage,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeInOut,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepPurple.shade50,
+      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: false,
         title: Text(
@@ -81,10 +90,24 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
           },
           itemCount: 2, // Material 3 explicitly defines item count
           itemBuilder: (context, index) {
+            final page = index == 0
+                ? MeditationTimerPage(
+                    currentPageIndex: _currentPage,
+                    onToggle: _togglePage,
+                  )
+                : MindfulBellsPage(
+                    currentPageIndex: _currentPage,
+                    onToggle: _togglePage,
+                  );
+
             return Center(
-              child: index == 0
-                  ? MeditationTimerPage(currentPageIndex: _currentPage)
-                  : MindfulBellsPage(currentPageIndex: _currentPage),
+              child: Padding(
+                padding: const EdgeInsets.all(4.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16.0),
+                  child: page,
+                ),
+              ),
             );
           },
         ),

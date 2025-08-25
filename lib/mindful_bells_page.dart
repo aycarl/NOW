@@ -6,8 +6,13 @@ import 'settings_provider.dart';
 
 class MindfulBellsPage extends StatefulWidget {
   final int currentPageIndex;
+  final VoidCallback onToggle;
 
-  const MindfulBellsPage({super.key, this.currentPageIndex = 1});
+  const MindfulBellsPage({
+    super.key,
+    this.currentPageIndex = 1,
+    required this.onToggle,
+  });
 
   @override
   State<MindfulBellsPage> createState() => _MindfulBellsPageState();
@@ -54,19 +59,6 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
   @override
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
-    if (widget.currentPageIndex == 0) {
-      return Container(
-        alignment: Alignment.topLeft,
-        padding: const EdgeInsets.only(top: 16.0, left: 8.0, right: 8.0),
-        child: Text(
-          'Mindful Bells',
-          style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-            color: Colors.deepPurple,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      );
-    }
 
     return Scaffold(
       backgroundColor: Colors.deepPurple[50],
@@ -78,12 +70,24 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
             // Header
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                'Mindful Bells',
-                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.deepPurple,
-                  fontWeight: FontWeight.bold,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    'Mindful Bells',
+                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                      color: Colors.deepPurple,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      widget.currentPageIndex == 1 ? Icons.remove : Icons.add,
+                      color: Colors.deepPurple,
+                    ),
+                    onPressed: widget.onToggle,
+                  ),
+                ],
               ),
             ),
 
