@@ -26,6 +26,7 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.deepPurple.shade50,
       appBar: AppBar(
         centerTitle: false,
         title: Text(

@@ -81,13 +81,6 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
     }
   }
 
-  void _savePreset() {
-    // TODO: Implement preset saving functionality
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Preset saved successfully!')));
-  }
-
   void _startMeditation() {
     // TODO: Implement meditation timer functionality
     ScaffoldMessenger.of(context).showSnackBar(
@@ -139,118 +132,108 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
               ),
             ),
           ),
-          // Random inspirational quote - reduced space
-          SizedBox(
-            height: 100,
-            child: Center(
-              child: Text(
-                _randomQuote,
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontStyle: FontStyle.italic,
-                  color: Colors.deepPurple[700],
-                ),
-                textAlign: TextAlign.center,
-              ),
-            ),
-          ),
-
-          // Timer, Sound, and Preparation Controls - more space
-          Flexible(
-            flex: 6,
+          Expanded(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Timer Picker
-                Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ListTile(
-                    leading: const Icon(Icons.timer, color: Colors.deepPurple),
-                    title: const Text('Meditation Duration'),
-                    subtitle: Text('$_selectedMinutes minutes'),
-                    trailing: const Icon(Icons.arrow_drop_down),
-                    onTap: _showTimePicker,
+                // Random inspirational quote
+                Expanded(
+                  flex: 2, // 40%
+                  child: Center(
+                    child: Text(
+                      _randomQuote,
+                      style: Theme.of(context).textTheme.headlineSmall
+                          ?.copyWith(
+                            fontStyle: FontStyle.italic,
+                            color: Colors.deepPurple[700],
+                          ),
+                      textAlign: TextAlign.center,
+                    ),
                   ),
                 ),
 
-                // Sound Picker
-                Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.music_note,
-                      color: Colors.deepPurple,
-                    ),
-                    title: const Text('Sound'),
-                    subtitle: Text(
-                      _soundOptions.firstWhere(
-                        (s) => s['value'] == _selectedSound,
-                      )['label']!,
-                    ),
-                    trailing: const Icon(Icons.arrow_drop_down),
-                    onTap: _showSoundPicker,
-                  ),
-                ),
+                // Timer, Sound, and Preparation Controls
+                Expanded(
+                  flex: 3, // 60%
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      // Timer Picker
+                      Card(
+                        margin: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.timer,
+                            color: Colors.deepPurple,
+                          ),
+                          title: const Text('Meditation Duration'),
+                          subtitle: Text('$_selectedMinutes minutes'),
+                          trailing: const Icon(Icons.arrow_drop_down),
+                          onTap: _showTimePicker,
+                        ),
+                      ),
 
-                // Preparation Time Picker
-                Card(
-                  margin: const EdgeInsets.symmetric(vertical: 4.0),
-                  child: ListTile(
-                    leading: const Icon(
-                      Icons.hourglass_empty,
-                      color: Colors.deepPurple,
-                    ),
-                    title: const Text('Preparation Time'),
-                    subtitle: Text('$_preparationSeconds seconds'),
-                    trailing: const Icon(Icons.arrow_drop_down),
-                    onTap: _showPreparationPicker,
+                      // Sound Picker
+                      Card(
+                        margin: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.music_note,
+                            color: Colors.deepPurple,
+                          ),
+                          title: const Text('Sound'),
+                          subtitle: Text(
+                            _soundOptions.firstWhere(
+                              (s) => s['value'] == _selectedSound,
+                            )['label']!,
+                          ),
+                          trailing: const Icon(Icons.arrow_drop_down),
+                          onTap: _showSoundPicker,
+                        ),
+                      ),
+
+                      // Preparation Time Picker
+                      Card(
+                        margin: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: ListTile(
+                          leading: const Icon(
+                            Icons.hourglass_empty,
+                            color: Colors.deepPurple,
+                          ),
+                          title: const Text('Preparation Time'),
+                          subtitle: Text('$_preparationSeconds seconds'),
+                          trailing: const Icon(Icons.arrow_drop_down),
+                          onTap: _showPreparationPicker,
+                        ),
+                      ),
+                    ],
                   ),
                 ),
               ],
             ),
           ),
 
-          // Action Buttons - optimized size
-          Flexible(
-            flex: 2,
-            child: Container(
+          // Action Button
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: SizedBox(
               width: double.infinity,
-              padding: const EdgeInsets.symmetric(vertical: 16.0),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: ElevatedButton.icon(
-                      onPressed: _savePreset,
-                      icon: const Icon(Icons.save),
-                      label: const Text('Save Preset'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.grey[200],
-                        foregroundColor: Colors.deepPurple,
-                        minimumSize: const Size(0, 48),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    flex: 2,
-                    child: ElevatedButton.icon(
-                      onPressed: _startMeditation,
-                      icon: const Icon(Icons.play_arrow),
-                      label: const Text('Meditate'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
-                        foregroundColor: Colors.white,
-                        minimumSize: const Size(0, 48),
-                      ),
-                    ),
-                  ),
-                ],
+              child: ElevatedButton.icon(
+                onPressed: _startMeditation,
+                icon: const Icon(Icons.play_arrow),
+                label: const Text('Meditate'),
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.deepPurple,
+                  foregroundColor: Colors.white,
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  textStyle: const TextStyle(fontSize: 18),
+                ),
               ),
             ),
           ),
         ],
-      ), // Column
+      ),
     );
-  } // build method
+  }
 }
 
 // Time Picker Dialog
