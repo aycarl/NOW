@@ -269,7 +269,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
           childDelegate: ListWheelChildBuilderDelegate(
             builder: (context, index) {
               final minutes = 5 + index;
-              if (minutes > 60) return null;
+              if (minutes < 5 || minutes > 60) return null;
               return Center(
                 child: Text(
                   '$minutes min',
@@ -365,7 +365,7 @@ class _PreparationPickerDialogState extends State<_PreparationPickerDialog> {
       title: const Text('Preparation Time'),
       content: SizedBox(
         height: 300,
-        width: 200,
+        width: 300,
         child: ListWheelScrollView.useDelegate(
           itemExtent: 60,
           physics: const FixedExtentScrollPhysics(),
@@ -375,7 +375,7 @@ class _PreparationPickerDialogState extends State<_PreparationPickerDialog> {
           childDelegate: ListWheelChildBuilderDelegate(
             builder: (context, index) {
               final seconds = 10 + (index * 10);
-              if (seconds > 60) return null;
+              if (seconds < 10 || seconds > 60) return null;
               return Center(
                 child: Text(
                   '$seconds sec',
