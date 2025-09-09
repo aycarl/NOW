@@ -5,7 +5,6 @@ import 'package:now/carousel_home_page.dart';
 import 'package:now/meditation_timer_page.dart';
 import 'package:now/mindful_bells_page.dart';
 import 'package:now/angel_numbers_page.dart';
-import 'package:now/settings_page.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {

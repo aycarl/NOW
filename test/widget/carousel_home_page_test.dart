@@ -137,7 +137,7 @@ void main() {
         
         // Check that at least one ClipRRect has rounded corners
         final hasRoundedCorners = clipRRect.any((clip) => 
-          clip.borderRadius != null && clip.borderRadius != BorderRadius.zero);
+          clip.borderRadius != BorderRadius.zero);
         expect(hasRoundedCorners, isTrue);
       });
     });

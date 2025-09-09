@@ -54,7 +54,7 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
                 context: context,
                 isScrollControlled: true,
                 builder: (context) {
-                  return Container(
+                  return SizedBox(
                     height: MediaQuery.of(context).size.height * 0.7,
                     child: const Center(
                       child: Text(
