@@ -107,25 +107,26 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
                 ),
 
                 // Angel Numbers Card
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Card(
-                    color: Colors.deepPurple[100],
-                    child: ListTile(
-                      leading:
-                          const Icon(Icons.numbers, color: Colors.deepPurple),
-                      title: const Text('Angel Numbers'),
-                      trailing: const Icon(Icons.arrow_forward_ios),
-                      onTap: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const AngelNumbersPage(),
-                          ),
-                        );
-                      },
+                if (settingsProvider.showAngelNumbers)
+                  Padding(
+                    padding: const EdgeInsets.only(top: 8.0),
+                    child: Card(
+                      color: Colors.deepPurple[100],
+                      child: ListTile(
+                        leading: const Icon(Icons.numbers,
+                            color: Colors.deepPurple),
+                        title: const Text('Angel Numbers'),
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => const AngelNumbersPage(),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                   ),
-                ),
 
                 // Bells List
                 Expanded(

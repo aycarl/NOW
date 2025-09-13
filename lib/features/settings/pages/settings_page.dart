@@ -52,6 +52,13 @@ class SettingsPage extends StatelessWidget {
             subtitle: Text('${settingsProvider.maxBells} bells'),
             onTap: () => _showMaxBellsDialog(context, settingsProvider),
           ),
+          SwitchListTile(
+            title: const Text('Show Angel Numbers'),
+            value: settingsProvider.showAngelNumbers,
+            onChanged: (value) {
+              settingsProvider.showAngelNumbers = value;
+            },
+          ),
         ],
       ),
     );
