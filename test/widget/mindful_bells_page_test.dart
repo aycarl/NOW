@@ -10,7 +10,7 @@ void main() {
     group('Initial State', () {
       testWidgets('renders with default bells', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Check default bells
         expect(find.text('07:00 AM'), findsOneWidget);
@@ -21,7 +21,7 @@ void main() {
 
       testWidgets('displays header correctly', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Check header
         expect(find.text('Mindful Bells'), findsOneWidget);
@@ -33,7 +33,7 @@ void main() {
 
       testWidgets('shows angel numbers navigation card', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Check Angel Numbers card
         expect(find.text('Angel Numbers'), findsOneWidget);
@@ -43,7 +43,7 @@ void main() {
 
       testWidgets('displays floating action button', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - FAB should be visible (less than 5 bells)
         expect(find.byType(FloatingActionButton), findsOneWidget);
@@ -58,7 +58,7 @@ void main() {
     group('Bell List Display', () {
       testWidgets('bell list items have correct structure', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Check ListTile structure for first bell
         TestHelpers.verifyListTileStructure(
@@ -81,7 +81,7 @@ void main() {
 
       testWidgets('displays sound information correctly', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Check sound information is displayed
         expect(find.textContaining('Sound: default'), findsNWidgets(2));
@@ -96,7 +96,7 @@ void main() {
 
       testWidgets('edit buttons are functional', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Act - Tap first edit button
         final editButtons = find.byIcon(Icons.edit);
@@ -114,7 +114,7 @@ void main() {
     group('Angel Numbers Navigation', () {
       testWidgets('angel numbers card is tappable', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Act
         final angelNumbersCard = find.text('Angel Numbers');
@@ -127,7 +127,7 @@ void main() {
 
       testWidgets('angel numbers card has correct styling', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Get the Card widget containing Angel Numbers
         final cardFinder = find.ancestor(
@@ -144,7 +144,7 @@ void main() {
     group('Add Bell Functionality', () {
       testWidgets('FAB opens add bell dialog', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Act
         await tester.tap(find.byType(FloatingActionButton));
@@ -158,7 +158,7 @@ void main() {
 
       testWidgets('dialog can be cancelled', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
         
         await tester.tap(find.byType(FloatingActionButton));
         await tester.pumpAndSettle();
@@ -178,7 +178,7 @@ void main() {
     group('Edit Bell Functionality', () {
       testWidgets('edit button opens edit dialog', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Act
         await tester.tap(find.byIcon(Icons.edit).first);
@@ -192,7 +192,7 @@ void main() {
 
       testWidgets('edit dialog shows pre-filled values', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Act
         await tester.tap(find.byIcon(Icons.edit).first);
@@ -208,7 +208,7 @@ void main() {
     group('FAB Visibility Logic', () {
       testWidgets('FAB is visible when bells count is less than 5', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - FAB should be visible (2 bells < 5)
         expect(find.byType(FloatingActionButton), findsOneWidget);
@@ -221,7 +221,7 @@ void main() {
     group('Layout and Responsiveness', () {
       testWidgets('layout structure is correct', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Check main layout structure
         expect(find.byType(Scaffold), findsOneWidget);
@@ -232,7 +232,7 @@ void main() {
 
       testWidgets('list view displays correctly', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - ListView should contain ListTiles
         expect(find.byType(ListView), findsOneWidget);
@@ -241,12 +241,12 @@ void main() {
 
       testWidgets('handles different screen sizes', (WidgetTester tester) async {
         // Test with smaller screen
-        tester.binding.window.physicalSizeTestValue = const Size(300, 500);
-        tester.binding.window.devicePixelRatioTestValue = 1.0;
-        addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-        addTearDown(tester.binding.window.clearDevicePixelRatioTestValue);
+        tester.view.physicalSize = const Size(300, 500);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
 
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
         
         // Layout should still work
         expect(find.text('Mindful Bells'), findsOneWidget);
@@ -258,7 +258,7 @@ void main() {
     group('Interaction Testing', () {
       testWidgets('multiple edit buttons work independently', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         final editButtons = find.byIcon(Icons.edit);
         expect(editButtons, findsNWidgets(2));
@@ -285,7 +285,7 @@ void main() {
 
       testWidgets('rapid interactions are handled gracefully', (WidgetTester tester) async {
         // Arrange
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Act - Rapid tapping
         for (int i = 0; i < 3; i++) {
@@ -309,7 +309,7 @@ void main() {
     group('Accessibility', () {
       testWidgets('provides semantic information', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Check accessible elements
         expect(find.byType(FloatingActionButton), findsOneWidget);
@@ -322,7 +322,7 @@ void main() {
 
       testWidgets('edit buttons have proper semantics', (WidgetTester tester) async {
         // Arrange & Act
-        await TestHelpers.pumpTestWidget(tester, const MindfulBellsPage());
+        await TestHelpers.pumpTestWidget(tester, MindfulBellsPage(onToggle: () {}));
 
         // Assert - Edit buttons should be accessible
         final editButtons = find.byIcon(Icons.edit);

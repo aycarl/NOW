@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider with ChangeNotifier {
-  static const THEME_STATUS = "THEME_STATUS";
+  static const themeStatus = "THEME_STATUS";
   bool _darkTheme = false;
 
   bool get darkTheme => _darkTheme;
@@ -19,12 +19,12 @@ class ThemeProvider with ChangeNotifier {
 
   void _saveTheme(bool value) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setBool(THEME_STATUS, value);
+    prefs.setBool(themeStatus, value);
   }
 
   void _loadTheme() async {
     final prefs = await SharedPreferences.getInstance();
-    _darkTheme = prefs.getBool(THEME_STATUS) ?? false;
+    _darkTheme = prefs.getBool(themeStatus) ?? false;
     notifyListeners();
   }
 

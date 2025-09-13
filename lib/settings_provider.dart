@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SettingsProvider with ChangeNotifier {
-  static const MAX_BELLS_STATUS = "MAX_BELLS_STATUS";
+  static const maxBellsStatus = "MAX_BELLS_STATUS";
   int _maxBells = 10;
 
   int get maxBells => _maxBells;
@@ -19,12 +19,12 @@ class SettingsProvider with ChangeNotifier {
 
   void _saveMaxBells(int value) async {
     final prefs = await SharedPreferences.getInstance();
-    prefs.setInt(MAX_BELLS_STATUS, value);
+    prefs.setInt(maxBellsStatus, value);
   }
 
   void _loadMaxBells() async {
     final prefs = await SharedPreferences.getInstance();
-    _maxBells = prefs.getInt(MAX_BELLS_STATUS) ?? 10;
+    _maxBells = prefs.getInt(maxBellsStatus) ?? 10;
     notifyListeners();
   }
 }

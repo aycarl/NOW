@@ -146,10 +146,10 @@ void main() {
 
       testWidgets('handles small screen sizes', (WidgetTester tester) async {
         // Arrange - Small screen
-        tester.binding.window.physicalSizeTestValue = const Size(300, 400);
-        tester.binding.window.devicePixelRatioTestValue = 1.0;
-        addTearDown(tester.binding.window.clearPhysicalSizeTestValue);
-        addTearDown(tester.binding.window.clearDevicePixelRatioTestValue);
+        tester.view.physicalSize = const Size(300, 400);
+        tester.view.devicePixelRatio = 1.0;
+        addTearDown(tester.view.resetPhysicalSize);
+        addTearDown(tester.view.resetDevicePixelRatio);
 
         await TestHelpers.pumpTestWidget(tester, const AngelNumbersPage());
 
