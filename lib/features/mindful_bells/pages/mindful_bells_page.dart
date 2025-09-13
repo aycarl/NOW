@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'bell_form_dialog.dart';
-import 'angel_numbers_page.dart';
-import 'settings_provider.dart';
+
+import 'package:now/features/angel_numbers/angel_numbers_page.dart';
+import 'package:now/features/mindful_bells/widgets/bell_form_dialog.dart';
+import 'package:now/features/settings/providers/settings_provider.dart';
 
 /// A page that allows users to manage their mindful bells.
 class MindfulBellsPage extends StatefulWidget {

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:now/main.dart';
-import 'package:now/carousel_home_page.dart';
-import 'package:now/meditation_timer_page.dart';
-import 'package:now/mindful_bells_page.dart';
-import 'package:now/angel_numbers_page.dart';
+import 'package:now/features/home/carousel_home_page.dart';
+import 'package:now/features/meditation_timer/meditation_timer_page.dart';
+import 'package:now/features/mindful_bells/pages/mindful_bells_page.dart';
+import 'package:now/features/angel_numbers/angel_numbers_page.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'carousel_home_page.dart';
-import 'settings_provider.dart';
-import 'theme_provider.dart';
+
+import 'package:now/features/home/carousel_home_page.dart';
+import 'package:now/features/settings/providers/settings_provider.dart';
+import 'package:now/providers/theme_provider.dart';
 
 /// The main entry point of the application.
 /// Initializes the Flutter binding and runs the app.

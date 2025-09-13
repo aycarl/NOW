@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'meditation_timer_page.dart';
-import 'mindful_bells_page.dart';
-import 'settings_page.dart';
+
+import 'package:now/features/meditation_timer/meditation_timer_page.dart';
+import 'package:now/features/mindful_bells/pages/mindful_bells_page.dart';
+import 'package:now/features/settings/pages/settings_page.dart';
 
 /// The home page of the app, which uses a carousel to display different pages.
 class CarouselHomePage extends StatefulWidget {

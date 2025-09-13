@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:now/mindful_bells_page.dart';
-import 'package:now/angel_numbers_page.dart';
-import 'package:now/bell_form_dialog.dart';
+import 'package:now/features/mindful_bells/pages/mindful_bells_page.dart';
+import 'package:now/features/angel_numbers/angel_numbers_page.dart';
+import 'package:now/features/mindful_bells/widgets/bell_form_dialog.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {

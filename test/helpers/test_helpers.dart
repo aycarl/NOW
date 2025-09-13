@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
-import 'package:now/theme_provider.dart';
-import 'package:now/settings_provider.dart';
+import 'package:now/providers/theme_provider.dart';
+import 'package:now/features/settings/providers/settings_provider.dart';
 
 /// Test helpers for the NOW app
 class TestHelpers {

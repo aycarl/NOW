@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:now/angel_numbers_page.dart';
+import 'package:now/features/angel_numbers/angel_numbers_page.dart';
 import '../helpers/test_helpers.dart';
 
 void main() {

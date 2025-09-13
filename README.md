@@ -26,15 +26,18 @@ Welcome to the N:OW project! We're excited to have you. Here's a quick guide to 
 
 ### Project Structure
 
-The project follows a standard Flutter project structure. Here's a breakdown of the most important directories:
+The project is structured by feature to promote scalability and maintainability.
 
 *   `lib/`: This directory contains all the Dart code for the application.
     *   `main.dart`: The entry point of the application.
-    *   `carousel_home_page.dart`: The main screen of the app.
-    *   `meditation_timer_page.dart`: The meditation timer feature.
-    *   `mindful_bells_page.dart`: The mindful bells feature.
-    *   `settings_page.dart`: The settings screen.
-    *   `providers/`: This directory contains the state management logic for the app.
+    *   `features/`: Contains the individual features of the app, each in its own directory.
+        *   `angel_numbers/`: The angel numbers feature.
+        *   `home/`: The main home screen of the app.
+        *   `meditation_timer/`: The meditation timer feature.
+        *   `mindful_bells/`: The mindful bells feature.
+        *   `settings/`: The settings feature.
+    *   `providers/`: Contains global state management providers.
+    *   `shared/`: Contains widgets and utilities shared across multiple features.
 *   `android/`: Android-specific files.
 *   `ios/`: iOS-specific files.
 *   `test/`: Contains all the tests for the application.
