@@ -3,7 +3,9 @@ import 'meditation_timer_page.dart';
 import 'mindful_bells_page.dart';
 import 'settings_page.dart';
 
+/// The home page of the app, which uses a carousel to display different pages.
 class CarouselHomePage extends StatefulWidget {
+  /// Creates a new instance of the CarouselHomePage.
   const CarouselHomePage({super.key});
 
   @override
@@ -23,6 +25,7 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
     super.dispose();
   }
 
+  /// Toggles between the two pages in the carousel.
   void _togglePage() {
     final newPage = _currentPage == 0 ? 1 : 0;
     _pageController.animateToPage(

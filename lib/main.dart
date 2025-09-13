@@ -5,6 +5,8 @@ import 'carousel_home_page.dart';
 import 'settings_provider.dart';
 import 'theme_provider.dart';
 
+/// The main entry point of the application.
+/// Initializes the Flutter binding and runs the app.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
@@ -18,7 +20,10 @@ void main() async {
   );
 }
 
+/// The root widget of the application.
+/// It sets up the MaterialApp and the theme.
 class NOWApp extends StatelessWidget {
+  /// Creates a new instance of the NOWApp.
   const NOWApp({super.key});
 
   @override

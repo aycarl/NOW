@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+/// A page that provides a meditation timer with customizable settings.
 class MeditationTimerPage extends StatefulWidget {
+  /// The index of the current page in the carousel.
   final int currentPageIndex;
+  /// A callback function to toggle between pages.
   final VoidCallback onToggle;
 
+  /// Creates a new instance of the MeditationTimerPage.
   const MeditationTimerPage({
     super.key,
     this.currentPageIndex = 0,
@@ -41,11 +45,13 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
     {'label': 'Nature Sounds', 'value': 'nature'},
   ];
 
+  /// Returns a random inspirational quote.
   String get _randomQuote {
     final random = Random();
     return _inspirationalQuotes[random.nextInt(_inspirationalQuotes.length)];
   }
 
+  /// Shows a dialog to pick the meditation duration.
   void _showTimePicker() async {
     final result = await showDialog<int>(
       context: context,
@@ -58,6 +64,7 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
     }
   }
 
+  /// Shows a dialog to pick the meditation sound.
   void _showSoundPicker() async {
     final result = await showDialog<String>(
       context: context,
@@ -73,6 +80,7 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
     }
   }
 
+  /// Shows a dialog to pick the preparation time.
   void _showPreparationPicker() async {
     final result = await showDialog<int>(
       context: context,
@@ -86,6 +94,7 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
     }
   }
 
+  /// Starts the meditation timer.
   void _startMeditation() {
     // TODO: Implement meditation timer functionality
     ScaffoldMessenger.of(context).showSnackBar(
@@ -262,7 +271,7 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
   }
 }
 
-// Time Picker Dialog
+/// A dialog for picking the meditation duration.
 class _TimePickerDialog extends StatefulWidget {
   final int initialMinutes;
 
@@ -327,7 +336,7 @@ class _TimePickerDialogState extends State<_TimePickerDialog> {
   }
 }
 
-// Sound Picker Dialog
+/// A dialog for picking the meditation sound.
 class _SoundPickerDialog extends StatelessWidget {
   final List<Map<String, String>> soundOptions;
   final String selectedSound;
@@ -367,7 +376,7 @@ class _SoundPickerDialog extends StatelessWidget {
   }
 }
 
-// Preparation Time Picker Dialog
+/// A dialog for picking the preparation time.
 class _PreparationPickerDialog extends StatefulWidget {
   final int initialSeconds;
 

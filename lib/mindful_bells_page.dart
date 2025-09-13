@@ -4,10 +4,14 @@ import 'bell_form_dialog.dart';
 import 'angel_numbers_page.dart';
 import 'settings_provider.dart';
 
+/// A page that allows users to manage their mindful bells.
 class MindfulBellsPage extends StatefulWidget {
+  /// The index of the current page in the carousel.
   final int currentPageIndex;
+  /// A callback function to toggle between pages.
   final VoidCallback onToggle;
 
+  /// Creates a new instance of the MindfulBellsPage.
   const MindfulBellsPage({
     super.key,
     this.currentPageIndex = 1,
@@ -24,6 +28,7 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
     {'time': '08:30 AM', 'label': 'Work Bell', 'sound': 'default'},
   ];
 
+  /// Shows a dialog to edit a bell.
   Future<void> _editBell(int index) async {
     final bell = bells[index];
     final result = await showDialog<Map<String, String>>(
@@ -43,6 +48,7 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
     }
   }
 
+  /// Shows a dialog to add a new bell.
   Future<void> _addBell() async {
     final result = await showDialog<Map<String, String>>(
       context: context,
