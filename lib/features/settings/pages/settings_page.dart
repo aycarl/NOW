@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 
 import 'package:now/providers/theme_provider.dart';
 import 'package:now/features/settings/providers/settings_provider.dart';
+import 'package:now/features/settings/pages/about_page.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({super.key});
@@ -57,6 +58,18 @@ class SettingsPage extends StatelessWidget {
             value: settingsProvider.showAngelNumbers,
             onChanged: (value) {
               settingsProvider.showAngelNumbers = value;
+            },
+          ),
+          const Divider(),
+          ListTile(
+            leading: const Icon(Icons.info_outline),
+            title: const Text('About'),
+            subtitle: const Text('Learn about N:OW and Paper Huts'),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(builder: (_) => const AboutPage()),
+              );
             },
           ),
         ],

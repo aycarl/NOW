@@ -12,6 +12,7 @@ N:OW is structured using feature-based folders, leveraging the `provider` packag
 - **Mindful Bells**: Plays bells at intervals to encourage mindful awareness.
 - **Angel Numbers**: Displays and explains angel numbers for spiritual insight.
 - **Settings**: Personalize themes, preferences, and app behavior.
+- **About**: Learn about the app and Paper Huts (a sole proprietorship based in Ontario, Canada) with a link to https://www.paperhuts.com.
 - **Light/Dark Themes**: Switch between light and dark modes for comfort.
 
 ## Updated Project Structure
@@ -25,7 +26,7 @@ lib/
     meditation_timer/      # Meditation timer feature
     mindful_bells/         # Mindful bells feature
     settings/
-      pages/               # Settings UI pages
+      pages/               # Settings UI pages (incl. About)
       providers/           # Settings state management
   providers/
     theme_provider.dart    # Global theme provider
@@ -43,6 +44,9 @@ Welcome! To get started:
 1. **Clone the repository**: `git clone <repository-url>`
 2. **Install dependencies**: `flutter pub get`
 3. **Run the app**: `flutter run`
+
+### Notes
+- The About page uses `url_launcher` to open https://www.paperhuts.com in the system browser. If you hit a missing package error, run `flutter pub get`.
 
 ### Contribution Guidelines
 - Organize new features under `lib/features/<feature_name>/`
