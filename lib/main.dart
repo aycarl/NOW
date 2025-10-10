@@ -2,7 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:now/features/home/carousel_home_page.dart';
+import 'package:now/splash_screen.dart';
+
 import 'package:now/features/settings/providers/settings_provider.dart';
 import 'package:now/providers/theme_provider.dart';
 
@@ -46,7 +47,7 @@ class NOWApp extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const CarouselHomePage(),
+      home: const SplashScreen(),
       debugShowCheckedModeBanner: !kReleaseMode,
     );
   }

@@ -38,11 +38,8 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
   ];
 
   final List<Map<String, String>> _soundOptions = [
-    {'label': 'Default', 'value': 'default'},
     {'label': 'Singing Bowl', 'value': 'singing_bowl'},
-    {'label': 'Bell', 'value': 'bell'},
     {'label': 'Chime', 'value': 'chime'},
-    {'label': 'Nature Sounds', 'value': 'nature'},
   ];
 
   /// Returns a random inspirational quote.
