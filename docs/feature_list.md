@@ -41,3 +41,37 @@ Simultaneous mindful moments with family and friends: regardless of your locatio
 
 ### Home Interface - [IMPLEMENTED]
 - [x] Carousel-based navigation (swiping between Mindful Bells and Meditation Timer)
+
+## UX Goals & Streamlined User Flows
+
+To maintain a frictionless and serene experience, actions within the app are designed to be completed in 3 steps or less, utilizing smart defaults, gesture navigation, and one-tap actions.
+
+### 1. Authentication & Onboarding
+- **Step 1:** Open app to a serene splash screen and enter phone number.
+- **Step 2:** Enter the OTP sent to your device.
+- **Step 3:** Land instantly on the peaceful Home Carousel.
+
+### 2. Sound-Based Mindfulness Timer
+- **Step 1:** Swipe to the Meditation Timer screen.
+- **Step 2:** Tap a pre-set duration pill (e.g., "10 min").
+- **Step 3:** Tap Start (or wait 3 seconds to auto-start).
+
+### 3. Mindful Moments (Reminders / Bells)
+- **Step 1:** Swipe to the Mindful Bells screen.
+- **Step 2:** Tap an empty time slot or the "+" icon.
+- **Step 3:** Scroll to desired time and tap outside the picker to auto-save.
+
+### 4. Social Mindfulness (Shared Moments)
+- **Step 1:** From an active/scheduled Bell, tap the Share icon.
+- **Step 2:** Select a contact from the quick-select list.
+- **Step 3:** Tap Send Invite.
+
+### 5. Angel Numbers
+- **Step 1:** Tap the gentle glowing indicator when an Angel Number appears.
+- **Step 2:** Read the brief, soothing insight.
+- **Step 3:** Swipe down to dismiss and return to the main screen.
+
+### 6. Settings
+- **Step 1:** Tap the minimal gear/profile icon on the Home Carousel.
+- **Step 2:** Toggle desired preferences (e.g., Dark Mode).
+- **Step 3:** Swipe down to auto-save and return.
