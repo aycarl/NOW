@@ -2,15 +2,9 @@
 
 N:OW is a cross-platform mobile application built with Flutter, designed to help users cultivate mindfulness and calm through meditation and mindful exercises. The app features a clean, intuitive interface and modular architecture for easy contribution and scalability.
 
-## Feature List
+## Features
 
-- **Authentication**: Secure phone number authentication using Firebase OTP.
-- **Meditation Timer**: Guided meditation sessions with a customizable timer.
-- **Mindful Bells**: Plays bells at intervals to encourage mindful awareness.
-- **Angel Numbers**: Displays and explains angel numbers for spiritual insight.
-- **Settings**: Personalize themes, preferences, and app behavior.
-- **Light/Dark Themes**: Switch between light and dark modes for comfort.
-- **About**: Learn about the app and Paper Huts.
+The app is divided into several core features designed to provide a frictionless and serene experience. For a detailed list of features, their implementation status, and streamlined user flows, please refer to the [Features Documentation](docs/features/index.md).
 
 ## Project Layout
 
