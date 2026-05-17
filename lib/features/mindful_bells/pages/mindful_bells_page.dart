@@ -9,6 +9,7 @@ import 'package:now/features/settings/providers/settings_provider.dart';
 class MindfulBellsPage extends StatefulWidget {
   /// The index of the current page in the carousel.
   final int currentPageIndex;
+
   /// A callback function to toggle between pages.
   final VoidCallback onToggle;
 
@@ -67,44 +68,50 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
   Widget build(BuildContext context) {
     final settingsProvider = Provider.of<SettingsProvider>(context);
 
+    // Header logic (reused for both states)
+    Widget header = Padding(
+      padding: const EdgeInsets.only(top: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Mindful Bells',
+            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                ),
+          ),
+          IconButton(
+            icon: Icon(
+              widget.currentPageIndex == 1 ? Icons.remove : Icons.add,
+              color: Colors.deepPurple,
+            ),
+            onPressed: widget.onToggle,
+          ),
+        ],
+      ),
+    );
+
+    // Collapsed state
+    if (widget.currentPageIndex == 0) {
+      return Container(
+        color: Colors.deepPurple[50],
+        alignment: Alignment.topLeft,
+        padding: const EdgeInsets.only(top: 8.0, left: 8.0, right: 8.0),
+        child: header,
+      );
+    }
+
     return Stack(
       children: [
         Container(
           color: Colors.deepPurple[50],
           child: Padding(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Header
-                Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Mindful Bells',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineMedium
-                            ?.copyWith(
-                              color: Colors.deepPurple,
-                              fontWeight: FontWeight.bold,
-                            ),
-                      ),
-                      IconButton(
-                        icon: Icon(
-                          widget.currentPageIndex == 1
-                              ? Icons.remove
-                              : Icons.add,
-                          color: Colors.deepPurple,
-                        ),
-                        onPressed: widget.onToggle,
-                      ),
-                    ],
-                  ),
-                ),
+                header,
 
                 // Angel Numbers Card
                 if (settingsProvider.showAngelNumbers)
@@ -113,8 +120,8 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
                     child: Card(
                       color: Colors.deepPurple[100],
                       child: ListTile(
-                        leading: const Icon(Icons.numbers,
-                            color: Colors.deepPurple),
+                        leading:
+                            const Icon(Icons.numbers, color: Colors.deepPurple),
                         title: const Text('Angel Numbers'),
                         trailing: const Icon(Icons.arrow_forward_ios),
                         onTap: () {
@@ -130,33 +137,36 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
 
                 // Bells List
                 Expanded(
-                  child: Column(
-                    children: bells.asMap().entries.map((entry) {
-                      final index = entry.key;
-                      final bell = entry.value;
-                      return ListTile(
-                        leading: const Icon(Icons.alarm),
-                        title: Text(bell['time']!),
-                        subtitle: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(bell['label']!),
-                            if (bell['sound'] != null)
-                              Text(
-                                'Sound: ${bell['sound']}',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey[700],
+                  child: ListView.builder(
+                    itemCount: bells.length,
+                    itemBuilder: (context, index) {
+                      final bell = bells[index];
+                      return Card(
+                        margin: const EdgeInsets.symmetric(vertical: 4.0),
+                        child: ListTile(
+                          leading: const Icon(Icons.alarm, color: Colors.deepPurple),
+                          title: Text(bell['time']!),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(bell['label']!),
+                              if (bell['sound'] != null)
+                                Text(
+                                  'Sound: ${bell['sound']}',
+                                  style: TextStyle(
+                                    fontSize: 12,
+                                    color: Colors.grey[700],
+                                  ),
                                 ),
-                              ),
-                          ],
-                        ),
-                        trailing: IconButton(
-                          icon: const Icon(Icons.edit),
-                          onPressed: () => _editBell(index),
+                            ],
+                          ),
+                          trailing: IconButton(
+                            icon: const Icon(Icons.edit),
+                            onPressed: () => _editBell(index),
+                          ),
                         ),
                       );
-                    }).toList(),
+                    },
                   ),
                 ),
               ],
@@ -170,6 +180,8 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
             child: FloatingActionButton(
               onPressed: _addBell,
               tooltip: 'Add Mindful Bell',
+              backgroundColor: Colors.deepPurple,
+              foregroundColor: Colors.white,
               child: const Icon(Icons.add),
             ),
           ),

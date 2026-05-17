@@ -8,6 +8,12 @@ Status: [PARTIALLY IMPLEMENTED]
   - [x] Update reminder
   - [ ] Delete reminder
 
+Edge Cases:
+- User tries to set more than 3 reminders (or custom max bells) - show error message.
+- User tries to set a reminder in the past - show error message.
+- User tries to set a reminder without selecting a time - add button stays inactive.
+- User tries to set duplicate reminders - show error message.
+
 ## User Flow
 - **Step 1:** Swipe to the Mindful Bells screen.
 - **Step 2:** Tap an empty time slot or the "+" icon.
