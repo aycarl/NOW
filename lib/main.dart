@@ -8,11 +8,15 @@ import 'package:now/splash_screen.dart';
 import 'package:now/features/settings/providers/settings_provider.dart';
 import 'package:now/providers/theme_provider.dart';
 
+import 'firebase_options.dart';
+
 /// The main entry point of the application.
 /// Initializes the Flutter binding and runs the app.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     MultiProvider(
       providers: [
