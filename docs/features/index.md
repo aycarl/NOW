@@ -4,6 +4,7 @@ This directory contains the documentation for each core feature of the N:OW app,
 
 ## General Approach
 - [UI/UX Approach & Direction](ui_ux_approach.md)
+- [UI/UX Generation Prompt Summary](../ui_ux_prompt_summary.md)
 
 ## Features
 - [Authentication & Onboarding](authentication.md)
