@@ -14,26 +14,28 @@ class CarouselHomePage extends StatefulWidget {
 }
 
 class _CarouselHomePageState extends State<CarouselHomePage> {
-  final PageController _pageController = PageController(
-    viewportFraction: 0.92, // Multi-browse effect: show 92% of current page
-    initialPage: 0,
-  );
   int _currentPage = 0;
-
-  @override
-  void dispose() {
-    _pageController.dispose();
-    super.dispose();
-  }
 
   /// Toggles between the two pages in the carousel.
   void _togglePage() {
-    final newPage = _currentPage == 0 ? 1 : 0;
-    _pageController.animateToPage(
-      newPage,
-      duration: const Duration(milliseconds: 300),
-      curve: Curves.easeInOut,
-    );
+    setState(() {
+      _currentPage = _currentPage == 0 ? 1 : 0;
+    });
+  }
+
+  void _handleVerticalSwipe(DragEndDetails details) {
+    // A negative velocity means swiping UP
+    if (details.primaryVelocity! < -300) {
+      if (_currentPage == 0) {
+        setState(() => _currentPage = 1);
+      }
+    } 
+    // A positive velocity means swiping DOWN
+    else if (details.primaryVelocity! > 300) {
+      if (_currentPage == 1) {
+        setState(() => _currentPage = 0);
+      }
+    }
   }
 
   @override
@@ -83,34 +85,56 @@ class _CarouselHomePageState extends State<CarouselHomePage> {
         ],
       ),
       body: SafeArea(
-        child: PageView.builder(
-          controller: _pageController,
-          scrollDirection: Axis.vertical,
-          padEnds: false, // Remove padding to show partial content
-          onPageChanged: (index) {
-            setState(() {
-              _currentPage = index;
-            });
-          },
-          itemCount: 2, // Material 3 explicitly defines item count
-          itemBuilder: (context, index) {
-            final page = index == 0
-                ? MeditationTimerPage(
-                    currentPageIndex: _currentPage,
-                    onToggle: _togglePage,
-                  )
-                : MindfulBellsPage(
-                    currentPageIndex: _currentPage,
-                    onToggle: _togglePage,
-                  );
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            final double fullHeight = constraints.maxHeight;
+            // The peek size is 8% of the available height
+            final double peekHeight = fullHeight * 0.08;
 
-            return Center(
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(16.0),
-                  child: page,
-                ),
+            return GestureDetector(
+              onVerticalDragEnd: _handleVerticalSwipe,
+              child: Stack(
+                children: [
+                  // Mindful Bells Page
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    left: 0,
+                    right: 0,
+                    top: _currentPage == 1 ? peekHeight : fullHeight - peekHeight,
+                    bottom: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: MindfulBellsPage(
+                          currentPageIndex: _currentPage,
+                          onToggle: _togglePage,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  // Meditation Timer Page
+                  AnimatedPositioned(
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.easeInOut,
+                    left: 0,
+                    right: 0,
+                    top: 0,
+                    bottom: _currentPage == 0 ? peekHeight : fullHeight - peekHeight,
+                    child: Padding(
+                      padding: const EdgeInsets.all(4.0),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(16.0),
+                        child: MeditationTimerPage(
+                          currentPageIndex: _currentPage,
+                          onToggle: _togglePage,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             );
           },
