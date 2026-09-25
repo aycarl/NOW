@@ -224,8 +224,8 @@ void main() {
         expect(settingsButton, findsOneWidget);
         
         // Verify buttons are tappable
-        final donationsWidget = tester.widget<IconButton>(donationsButton);
-        final settingsWidget = tester.widget<IconButton>(settingsButton);
+        final donationsWidget = tester.widget<IconButton>(find.ancestor(of: donationsButton, matching: find.byType(IconButton)));
+        final settingsWidget = tester.widget<IconButton>(find.ancestor(of: settingsButton, matching: find.byType(IconButton)));
         
         expect(donationsWidget.onPressed, isNotNull);
         expect(settingsWidget.onPressed, isNotNull);

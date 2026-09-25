@@ -74,12 +74,15 @@ class _MindfulBellsPageState extends State<MindfulBellsPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
-            'Mindful Bells',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: Colors.deepPurple,
-                  fontWeight: FontWeight.bold,
-                ),
+          Expanded(
+            child: Text(
+              'Mindful Bells',
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    color: Colors.deepPurple,
+                    fontWeight: FontWeight.bold,
+                  ),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           IconButton(
             icon: Icon(

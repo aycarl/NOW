@@ -118,11 +118,14 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text(
-              'Meditation Timer',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                color: Colors.deepPurple,
-                fontWeight: FontWeight.bold,
+            Expanded(
+              child: Text(
+                'Meditation Timer',
+                style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                  color: Colors.deepPurple,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
               ),
             ),
             IconButton(
@@ -151,11 +154,14 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Meditation Timer',
-                    style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                      color: Colors.deepPurple,
-                      fontWeight: FontWeight.bold,
+                  Expanded(
+                    child: Text(
+                      'Meditation Timer',
+                      style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                        color: Colors.deepPurple,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ),
                   IconButton(
@@ -190,9 +196,14 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
                   // Timer, Sound, and Preparation Controls
                   Expanded(
                     flex: 3, // 60%
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        return SingleChildScrollView(
+                          child: ConstrainedBox(
+                            constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
                         // Sound Picker
                         Card(
                           margin: const EdgeInsets.symmetric(vertical: 4.0),
@@ -240,7 +251,11 @@ class _MeditationTimerPageState extends State<MeditationTimerPage> {
                             onTap: _showPreparationPicker,
                           ),
                         ),
-                      ],
+                              ],
+                            ),
+                          ),
+                        );
+                      },
                     ),
                   ),
                 ],
