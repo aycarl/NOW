@@ -1,20 +1,18 @@
-# Mindful moments (reminders)
+# Mindful Moments (Mindful Bells)
 
-Status: [PARTIALLY IMPLEMENTED]
+Status: [IMPLEMENTED]
 
-- [x] Pick number & time(s) of reminder(s): 1, 2 or 3 (Current implementation allows custom max bells)
-- [ ] Select frequency of reminders (daily, weekly)
-  - [x] Create custom reminder
-  - [x] Update reminder
-  - [ ] Delete reminder
+- [x] Pick number & time(s) of reminder(s) up to configurable `maxBells` limit
+- [x] Create custom reminder with time, intention label, and sound timbre
+- [x] Update reminder or cycle its acoustic symbol (`ZenSoundSymbol`)
+- [x] Delete / toggle reminder
+- [x] Yin & Yang theme adaptation (Washi Light & Obsidian Night dark mode)
 
-Edge Cases:
-- User tries to set more than 3 reminders (or custom max bells) - show error message.
-- User tries to set a reminder in the past - show error message.
-- User tries to set a reminder without selecting a time - add button stays inactive.
-- User tries to set duplicate reminders - show error message.
+## UI/UX Architecture ("Less is More")
+- **Collapsed Peeking Tab:** While the Meditation Timer is active on the Home screen, *Mindful Bells* rests at the bottom 8% of the screen as a frosted-glass tab displaying `MINDFUL BELLS`.
+- **Hairline Sanctuary:** When expanded, scheduled moments are displayed as featherweight typographic rows separated by subtle hairlines rather than heavy boxed cards, accompanied by minimalist sacred geometry sound symbols (`◯`, `◎`, `💧`, `〰`).
 
 ## User Flow
-- **Step 1:** Swipe to the Mindful Bells screen.
-- **Step 2:** Tap an empty time slot or the "+" icon.
-- **Step 3:** Scroll to desired time and tap outside the picker to auto-save.
+- **Step 1:** Swipe up or tap the **Mindful Bells** peeking tab at the bottom of the Home screen.
+- **Step 2:** Tap **+ Add Mindful Moment** (or the `+` action button) or tap an existing bell row to edit.
+- **Step 3:** Select the desired time, intention label, and sound resonance, then tap **Save / Add**.
