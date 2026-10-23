@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:provider/provider.dart';
+import 'package:now/core/theme/tao_theme.dart';
 import 'package:now/providers/theme_provider.dart';
 import 'package:now/features/settings/providers/settings_provider.dart';
 
@@ -15,10 +16,8 @@ class TestHelpers {
       ],
       child: MaterialApp(
         home: child,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: TaoTheme.light(),
+        darkTheme: TaoTheme.dark(),
       ),
     );
   }
@@ -32,10 +31,8 @@ class TestHelpers {
       ],
       child: MaterialApp(
         home: child,
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
+        theme: TaoTheme.light(),
+        darkTheme: TaoTheme.dark(),
       ),
     );
   }
