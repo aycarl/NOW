@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_core/firebase_core.dart';
 
+import 'package:now/core/theme/tao_theme.dart';
 import 'package:now/splash_screen.dart';
 
 import 'package:now/features/settings/providers/settings_provider.dart';
@@ -40,19 +41,8 @@ class NOWApp extends StatelessWidget {
     return MaterialApp(
       title: 'NOW',
       themeMode: themeProvider.darkTheme ? ThemeMode.dark : ThemeMode.light,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData(
-        brightness: Brightness.dark,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
-          brightness: Brightness.dark,
-          surface: const Color(0xFF121212), // A common dark theme surface color
-        ),
-        useMaterial3: true,
-      ),
+      theme: TaoTheme.light(),
+      darkTheme: TaoTheme.dark(),
       home: const SplashScreen(),
       debugShowCheckedModeBanner: !kReleaseMode,
     );
