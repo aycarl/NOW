@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "976907246014",
+    "project_id": "now-mindful-moments",
+    "storage_bucket": "now-mindful-moments.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:976907246014:android:0bdefe9e3b431f09dd81ef",
+        "android_client_info": {
+          "package_name": "com.paperhuts.now"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA62jCuUXOno4HH2iHmuDOGF7Wju98Ly3A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

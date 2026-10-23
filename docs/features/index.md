@@ -4,6 +4,10 @@ This directory contains the documentation for each core feature of the N:OW app,
 
 ## General Approach
 - [UI/UX Approach & Direction](ui_ux_approach.md)
+- [The Tao UI/UX Concept](tao_ui_ux_concept.md)
+- [Standard Design System & Brand Color Specification](../design_system.md)
+- [UI/UX Generation Prompt Summary](../ui_ux_prompt_summary.md)
+- [Automated SemVer Releases & Multi-Platform CI/CD Guide](../ci_cd_release_guide.md)
 
 ## Features
 - [Authentication & Onboarding](authentication.md)
