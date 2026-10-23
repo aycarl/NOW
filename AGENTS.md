@@ -43,6 +43,7 @@ NOW/
 ├── docs/
 │   ├── design_system.md                          # Canonical brand colors, typography & motion spec
 │   ├── ci_cd_release_guide.md                    # SemVer Release Please & CI/CD documentation
+│   ├── firebase_setup_guide.md                   # Firebase project & multi-platform Auth setup guide
 │   └── features/                                 # Structured feature specs (index.md, tao_ui_ux_concept.md, etc.)
 ├── test/
 │   ├── helpers/test_helpers.dart                 # Test wrapper with TaoTheme & MultiProvider

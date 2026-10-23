@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -30,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -45,6 +39,15 @@ class DefaultFirebaseOptions {
         );
     }
   }
+
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyBajItG_IhFGzro0Sq9hst3M9_VnoO5OWk',
+    appId: '1:976907246014:web:c0a6bfa32150e0e7dd81ef',
+    messagingSenderId: '976907246014',
+    projectId: 'now-mindful-moments',
+    authDomain: 'now-mindful-moments.firebaseapp.com',
+    storageBucket: 'now-mindful-moments.firebasestorage.app',
+  );
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyA62jCuUXOno4HH2iHmuDOGF7Wju98Ly3A',
@@ -70,5 +73,14 @@ class DefaultFirebaseOptions {
     projectId: 'now-mindful-moments',
     storageBucket: 'now-mindful-moments.firebasestorage.app',
     iosBundleId: 'com.paperhuts.now',
+  );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBajItG_IhFGzro0Sq9hst3M9_VnoO5OWk',
+    appId: '1:976907246014:web:d69017cac6934e80dd81ef',
+    messagingSenderId: '976907246014',
+    projectId: 'now-mindful-moments',
+    authDomain: 'now-mindful-moments.firebaseapp.com',
+    storageBucket: 'now-mindful-moments.firebasestorage.app',
   );
 }

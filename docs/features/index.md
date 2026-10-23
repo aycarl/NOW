@@ -8,6 +8,7 @@ This directory contains the documentation for each core feature of the N:OW app,
 - [Standard Design System & Brand Color Specification](../design_system.md)
 - [UI/UX Generation Prompt Summary](../ui_ux_prompt_summary.md)
 - [Automated SemVer Releases & Multi-Platform CI/CD Guide](../ci_cd_release_guide.md)
+- [Firebase Project & Multi-Platform Authentication Setup Guide](../firebase_setup_guide.md)
 
 ## Features
 - [Authentication & Onboarding](authentication.md)

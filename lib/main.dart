@@ -15,9 +15,13 @@ import 'firebase_options.dart';
 /// Initializes the Flutter binding and runs the app.
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint('Firebase initialization skipped or already initialized: $e');
+  }
   runApp(
     MultiProvider(
       providers: [
@@ -45,6 +49,44 @@ class NOWApp extends StatelessWidget {
       darkTheme: TaoTheme.dark(),
       home: const SplashScreen(),
       debugShowCheckedModeBanner: !kReleaseMode,
+      builder: (context, child) {
+        if (!kIsWeb || child == null) {
+          return child ?? const SizedBox.shrink();
+        }
+        return LayoutBuilder(
+          builder: (context, constraints) {
+            if (constraints.maxWidth <= 540) {
+              return child;
+            }
+            final p = TaoPalette.of(context);
+            return ColoredBox(
+              color: p.stoneWashEnd,
+              child: Center(
+                child: Container(
+                  constraints: const BoxConstraints(
+                    maxWidth: 440,
+                    maxHeight: 920,
+                  ),
+                  margin: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(32),
+                    border: Border.all(color: p.peekingCardBorder, width: 1),
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.black.withValues(alpha: 0.14),
+                        blurRadius: 36,
+                        offset: const Offset(0, 12),
+                      ),
+                    ],
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: child,
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
